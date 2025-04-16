@@ -14,3 +14,21 @@ spectrograms/
 # Ignore system/OS files
 .DS_Store
 Thumbs.db
+
+tf-env/
+
+# Model files
+*.keras
+*.h5
+
+# Audio files
+*.wav
+
+# Generated plots/images
+*.png
+
+# Spectrograms and other temp folders
+spectrograms/
+custom_spec.png
+
+
