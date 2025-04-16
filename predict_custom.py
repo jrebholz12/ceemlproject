@@ -6,7 +6,7 @@ from PIL import Image
 import tensorflow as tf
 
 # --- SETTINGS ---
-WAV_FILE = "sneeze.wav"  # Replace with your custom .wav
+WAV_FILE = "cough.wav"  # Replace with your custom .wav
 MODEL_PATH = "cnn_model_v2.keras"
 CLASS_INDEX_PATH = "class_indices_v2.txt"
 SPEC_IMG = "custom_spec.png"
@@ -33,9 +33,12 @@ with open(CLASS_INDEX_PATH, "r") as f:
     class_indices = eval(f.read())
 labels = list(class_indices.keys())
 
-# --- STEP 4: Predict ---
-predictions = model.predict(img_array)
-top_index = np.argmax(predictions[0])
-confidence = predictions[0][top_index] * 100
+# --- STEP 4: Predict Top 3 ---
+predictions = model.predict(img_array)[0]  # Get raw array of predictions
+top_3_indices = predictions.argsort()[-3:][::-1]  # Indices of top 3 predictions, descending
 
-print(f"🔊 Predicted Class: **{labels[top_index]}** ({confidence:.2f}%)")
+print("🔊 Top 3 Predictions:")
+for idx in top_3_indices:
+    label = labels[idx]
+    confidence = predictions[idx] * 100
+    print(f" - {label}: {confidence:.2f}%")
