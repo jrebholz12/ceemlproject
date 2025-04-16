@@ -62,8 +62,15 @@ for idx, row in meta.iterrows():
     except Exception as e:
         print(f"Error processing {filename}: {e}")
 
-# Save tabular features
-df = pd.DataFrame(tabular_features)
-df['label'] = labels
+# Define feature column names
+mfcc_names = [f"mfcc_{i+1}" for i in range(13)]
+chroma_names = [f"chroma_{i+1}" for i in range(12)]
+contrast_names = [f"contrast_{i+1}" for i in range(7)]
+column_names = mfcc_names + chroma_names + contrast_names + ["label"]
+
+# Save tabular features with named columns
+df = pd.DataFrame(tabular_features, columns=column_names[:-1])
+df["label"] = labels
 df.to_csv("esc50_features.csv", index=False)
-print("✅ Done! Saved tabular features to esc50_features.csv")
+print("✅ Done! Saved labeled features to esc50_features.csv")
+
