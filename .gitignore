@@ -1,0 +1,16 @@
+.idea/
+.ipynb_checkpoints
+*.pyc
+
+# Ignore ESC-50 audio after initial push
+ESC-50-master/audio/
+
+# Ignore generated spectrograms and model artifacts
+spectrograms/
+*.npy
+*.pkl
+*.h5
+
+# Ignore system/OS files
+.DS_Store
+Thumbs.db
