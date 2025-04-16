@@ -14,3 +14,6 @@ spectrograms/
 # Ignore system/OS files
 .DS_Store
 Thumbs.db
+
+tf-env/
+
